@@ -1,153 +1,80 @@
-# Jonathan Ige — Cyber Security Portfolio
+# Cyber Security Portfolio — Jonathan Ige
 
 ## About Me
 
-I'm a T Level Digital Support and Security student, specialising in **Cyber Security**.
+I'm a T Level student at Gateshead College (2025–2027), studying **Digital Support & Security** with a specialism in **Network & Infrastructure**. In my second year, my occupational specialism is **Cyber Security**.
 
-I'm developing practical skills across cybersecurity, networking, Linux, security controls and infrastructure, alongside my academic studies.
+I'm working towards a **Level 6 Cyber Security Degree Apprenticeship** after completing my T Level, with a long-term goal of progressing into security leadership.
 
-I'm currently preparing for a **Cyber Security Degree Apprenticeship**, with the long-term goal of progressing into senior cybersecurity and security leadership roles.
+This repository documents my practical development through **hands-on labs, networking exercises, security configurations and small projects**. I aim to show not just what I've learned, but how I've applied it.
 
-## Skills & Technologies
+## Technical Skills
 
-### Cyber Security
+* **Networking:** VLAN configuration, basic routing and topology design using Cisco Packet Tracer; diagnosing and fixing a VLAN misconfiguration
+* **Linux:** Kali Linux in VirtualBox; Linux command-line administration and networking diagnostics
+* **Security:** UFW firewall configuration, firewall rule testing and basic security controls
+* **Network analysis:** Wireshark for capturing and inspecting network traffic
+* **Tools:** Cisco Packet Tracer, Wireshark, Nmap, VirtualBox, Kali Linux
+* **Currently developing:** Linux administration, networking diagnostics, cybersecurity labs, introductory Python and CTF-style problem solving
 
-* Security fundamentals
-* Security controls
-* Risk assessment
-* Cybersecurity principles
-* Network security
+## Featured Project
 
-### Networking
+### UFW Firewall Lab
 
-* TCP/IP
-* IP addressing
-* DNS
-* DHCP
-* Network troubleshooting
-* Network traffic analysis
-* Wireshark
+A hands-on lab configuring and testing **UFW (Uncomplicated Firewall)** on Kali Linux within a VirtualBox host-only network.
 
-### Linux
+The lab covers:
 
-* Linux command line
-* File and directory management
-* Users and permissions
-* Networking commands
-* Basic system administration
+* Environment setup
+* Firewall configuration
+* Rules applied
+* Testing methodology
+* Results
+* Security considerations
+* Limitations
+* What I would improve next
 
-### Programming
-
-* Python fundamentals
-* Basic scripting and automation
-
-### Tools & Platforms
-
-* Kali Linux
-* Wireshark
-* Nmap
-* VirtualBox
-* Git & GitHub
-
-## Portfolio
-
-This repository documents my practical cybersecurity learning, labs and projects.
-
-### 🛡️ Security Controls
-
-Practical work focused on implementing and understanding security controls.
-
-* **UFW Firewall Lab** — configuring and testing firewall rules on Linux
-
-### 🌐 Networking
-
-Practical networking exercises covering:
-
-* IP addressing
-* Routing
-* DNS
-* Network interfaces
-* Network connections
-* Traffic analysis
-
-### 🐧 Linux
-
-Linux administration and command-line exercises covering:
-
-* File management
-* Permissions
-* Users and groups
-* Networking
-* System administration
-
-### 🔐 Cybersecurity
-
-Cybersecurity labs and exercises covering security concepts, tools and practical techniques.
-
-### 🚀 Projects
-
-Larger practical projects that bring together the technical skills I'm developing.
-
-## Current Learning
-
-I'm currently developing my skills in:
-
-* Cyber Security
-* Network Security
-* Linux
-* Windows security
-* Security controls
-* Risk assessment
-* Incident response
-* Python
-* Wireshark
-* Nmap
-
-My Year 2 **Cyber Security Occupational Specialism** is helping me develop these skills through practical, skills-based work.
-
-## Goals
-
-### Short Term
-
-* Complete my T Level with the strongest possible result
-* Develop a strong practical cybersecurity foundation
-* Build a portfolio of genuine technical projects
-* Gain experience through practical labs and projects
-
-### Next Step
-
-Progress into a **Level 6 or Level 7 Cyber Security Degree Apprenticeship**.
-
-### Long Term
-
-Develop into a senior cybersecurity professional and eventually work towards security leadership roles such as **CISO**.
-
-## How I Learn
-
-I focus on learning by doing.
-
-My portfolio is intended to show:
-
-**Learn → Build → Test → Document → Improve**
-
-Where possible, projects include the objective, tools used, implementation, testing, results and lessons learned.
+This is currently my strongest documented practical security project.
 
 ## Repository Structure
 
-```text
-cyber-security-portfolio/
-│
-├── cybersecurity/
-├── labs/
-├── networking/
-├── projects/
-├── security-controls/
-│   └── ufw-firewall-lab/
-└── README.md
-```
+| Folder                               | Contents                                                             |
+| ------------------------------------ | -------------------------------------------------------------------- |
+| `security-controls/ufw-firewall-lab` | Full UFW firewall configuration and testing lab                      |
+| `networking`                         | Networking fundamentals, Packet Tracer work and diagnostic exercises |
+| `cybersecurity`                      | Work related to my Year 2 Cyber Security Occupational Specialism     |
+| `labs`                               | Additional hands-on cybersecurity and technical labs                 |
+| `projects`                           | Small standalone projects demonstrating practical skills             |
+
+## What I'm Currently Learning
+
+* Deepening my Linux and networking knowledge
+* Developing stronger network troubleshooting and diagnostic skills
+* Applying cybersecurity concepts through practical labs
+* Building CTF-style problem-solving skills
+* Learning introductory Python for automation and security-related tasks
+* Turning my T Level Cyber Security work into documented practical projects
+
+## Certifications & Training
+
+* **Cisco — Exploring Networking with Cisco Packet Tracer**
+
+## Portfolio Approach
+
+I'm focused on building a portfolio based on **practical evidence rather than simply collecting notes or listing technologies**.
+
+Each project aims to document:
+
+1. The objective
+2. The environment
+3. What I configured or investigated
+4. The commands and tools used
+5. How I tested the result
+6. What I learned
+7. Limitations and potential improvements
+
+The portfolio will develop alongside my technical skills throughout my T Level.
 
 ## Contact
 
-**GitHub:** [jonathanige-cyber](https://github.com/jonathanige-cyber)
-
-I'm currently building this portfolio alongside my T Level studies and preparing for future Cyber Security Degree Apprenticeship applications.
+I'm currently working towards **Level 6 Cyber Security Degree Apprenticeships** and am open to feedback, collaboration and opportunities to develop my practical cybersecurity experience.
