@@ -6,7 +6,7 @@ This lab demonstrates how a host-based firewall can control access to a network 
 
 I configured and tested **UFW (Uncomplicated Firewall)** on a Kali Linux virtual machine running in VirtualBox. A Python HTTP server was used as the test service, and a Windows host was used to test whether the service could be accessed.
 
-The main goal was to demonstrate the difference between **blocked and allowed incoming traffic** using a simple, controlled environment.
+The aim was to demonstrate the difference between **blocked and allowed incoming traffic** using a controlled lab environment.
 
 ---
 
@@ -63,9 +63,7 @@ The important interface for the lab was `eth1`, which had the address:
 
 This placed the Kali VM on the VirtualBox Host-Only network.
 
-> 📸 **Screenshot 1 — Network Interfaces**
-> `01-network-interfaces.png`
-> Shows the Kali network interfaces and IP addresses.
+![Network interfaces](images/01-network-interfaces.png)
 
 I then checked the routing table:
 
@@ -81,9 +79,7 @@ The output confirmed that:
 
 meaning the Host-Only network was directly connected through `eth1`.
 
-> 📸 **Screenshot 2 — Routing Table**
-> `04-routing-table.png`
-> Shows the `ip route` output.
+![Routing table](images/04-routing-table.png)
 
 ---
 
@@ -107,9 +103,7 @@ Default: deny (incoming), allow (outgoing), disabled (routed)
 
 This meant incoming connections were denied by default, while outgoing connections were allowed.
 
-> 📸 **Screenshot 3 — Initial UFW Configuration**
-> `02-ufw-baseline.png`
-> Shows the output of `sudo ufw status verbose`.
+![Initial UFW configuration](images/02-ufw-baseline.png)
 
 I then checked whether any specific UFW rules were already configured:
 
@@ -119,9 +113,7 @@ sudo ufw status numbered
 
 The output showed that UFW was active but there were no numbered rules.
 
-> 📸 **Screenshot 4 — Initial UFW Rules**
-> `03-ufw-rules-baseline.png`
-> Shows the initial numbered UFW rules.
+![Initial UFW rules](images/03-ufw-rules-baseline.png)
 
 ---
 
@@ -143,9 +135,7 @@ Serving HTTP on 192.168.56.101 port 8080
 
 This meant the service was listening on port `8080`.
 
-> 📸 **Screenshot 5 — HTTP Server Running**
-> `05-http-server.png`
-> Shows the Python HTTP server running on `192.168.56.101:8080`.
+![HTTP server running](images/05-http-server.png)
 
 ---
 
@@ -161,9 +151,7 @@ ping 192.168.56.101
 
 The ping received replies, confirming that the Host-Only network connection between Windows and Kali was working.
 
-> 📸 **Screenshot 6 — Successful Ping Test**
-> `06-ping-test.png`
-> Shows successful ping replies from Windows to Kali.
+![Successful ping test](images/06-ping-test.png)
 
 I then attempted to access the HTTP service from Windows using:
 
@@ -193,9 +181,7 @@ sudo ufw status numbered
 
 The new rule appeared in the configuration.
 
-> 📸 **Screenshot 7 — UFW Allow Rule**
-> `07-ufw-allow-8080.png`
-> Shows the `8080/tcp` allow rule.
+![UFW allow rule](images/07-ufw-allow-8080.png)
 
 ---
 
@@ -211,9 +197,7 @@ This time, the Python HTTP server page loaded successfully.
 
 This demonstrated that the UFW rule allowed the required incoming traffic to reach the service.
 
-> 📸 **Screenshot 8 — Allowed HTTP Connection**
-> `08-http-allowed.png`
-> Shows the HTTP server page successfully loading from Windows.
+![Allowed HTTP connection](images/08-http-allowed.png)
 
 ---
 
@@ -235,9 +219,7 @@ sudo ufw status numbered
 
 The result showed that there were no numbered rules remaining.
 
-> 📸 **Screenshot 9 — UFW Rule Removed**
-> `09-ufw-rule-removed.png`
-> Shows the rule being deleted and the resulting UFW configuration.
+![UFW rule removed](images/09-ufw-rule-removed.png)
 
 ---
 
@@ -253,9 +235,7 @@ The HTTP service could no longer be accessed.
 
 This demonstrated the effect of UFW's default incoming-deny policy.
 
-> 📸 **Screenshot 10 — Blocked HTTP Connection**
-> `10-http-blocked.png`
-> Shows the Windows browser failing to access the HTTP service.
+![Blocked HTTP connection](images/10-http-blocked.png)
 
 ---
 
@@ -275,9 +255,7 @@ Default: deny (incoming), allow (outgoing)
 
 The specific `8080/tcp` allow rule was no longer present.
 
-> 📸 **Screenshot 11 — Final UFW Configuration**
-> `11-ufw-final-state.png`
-> Shows the final UFW status.
+![Final UFW configuration](images/11-ufw-final-state.png)
 
 ---
 
