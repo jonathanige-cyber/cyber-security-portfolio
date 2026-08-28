@@ -45,14 +45,11 @@ Kali also had a NAT interface (`eth0`) for internet access:
 
 The firewall testing was performed using the **Host-Only network** through `eth1`.
 
-> 📸 **Evidence 1 — Network configuration**
-> Add a screenshot showing the `ip a` output with `eth0` and `eth1`, including `192.168.56.101`.
-
 ---
 
-## 1. Checking the Network Configuration
+## 1. Network Configuration
 
-I first checked the network interfaces on Kali using:
+I first checked the network interfaces on Kali:
 
 ```bash
 ip a
@@ -65,6 +62,10 @@ The important interface for the lab was `eth1`, which had the address:
 ```
 
 This placed the Kali VM on the VirtualBox Host-Only network.
+
+> 📸 **Screenshot 1 — Network Interfaces**
+> `01-network-interfaces.png`
+> Shows the Kali network interfaces and IP addresses.
 
 I then checked the routing table:
 
@@ -80,14 +81,15 @@ The output confirmed that:
 
 meaning the Host-Only network was directly connected through `eth1`.
 
-> 📸 **Evidence 2 — Routing table**
-> Add a screenshot showing the `ip route` output.
+> 📸 **Screenshot 2 — Routing Table**
+> `04-routing-table.png`
+> Shows the `ip route` output.
 
 ---
 
-## 2. Checking the Initial UFW Configuration
+## 2. Initial UFW Configuration
 
-Before changing anything, I checked the current UFW status:
+Before making any changes, I checked the current UFW status:
 
 ```bash
 sudo ufw status verbose
@@ -95,7 +97,7 @@ sudo ufw status verbose
 
 UFW was already active.
 
-The important configuration was:
+The configuration showed:
 
 ```text
 Status: active
@@ -103,10 +105,11 @@ Logging: on (low)
 Default: deny (incoming), allow (outgoing), disabled (routed)
 ```
 
-This meant that incoming connections were denied by default, while outgoing connections were allowed.
+This meant incoming connections were denied by default, while outgoing connections were allowed.
 
-> 📸 **Evidence 3 — Initial UFW configuration**
-> Add a screenshot showing the output of `sudo ufw status verbose`.
+> 📸 **Screenshot 3 — Initial UFW Configuration**
+> `02-ufw-baseline.png`
+> Shows the output of `sudo ufw status verbose`.
 
 I then checked whether any specific UFW rules were already configured:
 
@@ -114,16 +117,17 @@ I then checked whether any specific UFW rules were already configured:
 sudo ufw status numbered
 ```
 
-The result showed that UFW was active but there were no numbered rules.
+The output showed that UFW was active but there were no numbered rules.
 
-> 📸 **Evidence 4 — Initial UFW rules**
-> Add a screenshot showing the `sudo ufw status numbered` output.
+> 📸 **Screenshot 4 — Initial UFW Rules**
+> `03-ufw-rules-baseline.png`
+> Shows the initial numbered UFW rules.
 
 ---
 
 ## 3. Starting the Test Service
 
-I used Python's built-in HTTP server to create a simple network service for testing.
+I used Python's built-in HTTP server as a simple service to test the firewall.
 
 The server was bound to the Kali Host-Only IP:
 
@@ -139,16 +143,17 @@ Serving HTTP on 192.168.56.101 port 8080
 
 This meant the service was listening on port `8080`.
 
-> 📸 **Evidence 5 — HTTP server running**
-> Add a screenshot showing the Python HTTP server running on `192.168.56.101:8080`.
+> 📸 **Screenshot 5 — HTTP Server Running**
+> `05-http-server.png`
+> Shows the Python HTTP server running on `192.168.56.101:8080`.
 
 ---
 
-## 4. Testing Connectivity
+## 4. Testing Network Connectivity
 
-Before testing the firewall rule, I confirmed that the Windows host could communicate with the Kali VM.
+Before testing the firewall, I confirmed that the Windows host could communicate with the Kali VM.
 
-From Windows, I used:
+From Windows, I ran:
 
 ```text
 ping 192.168.56.101
@@ -156,8 +161,9 @@ ping 192.168.56.101
 
 The ping received replies, confirming that the Host-Only network connection between Windows and Kali was working.
 
-> 📸 **Evidence 6 — Network connectivity**
-> Add a screenshot showing successful ping replies from Windows to `192.168.56.101`.
+> 📸 **Screenshot 6 — Successful Ping Test**
+> `06-ping-test.png`
+> Shows successful ping replies from Windows to Kali.
 
 I then attempted to access the HTTP service from Windows using:
 
@@ -167,11 +173,11 @@ http://192.168.56.101:8080
 
 The page did not load while UFW was active with incoming traffic denied by default.
 
-This provided the initial indication that the firewall was preventing access to the service.
+This provided the initial indication that UFW was preventing access to the service.
 
 ---
 
-## 5. Allowing the HTTP Service
+## 5. Allowing Port 8080
 
 I added a UFW rule allowing TCP traffic to port `8080`:
 
@@ -179,16 +185,17 @@ I added a UFW rule allowing TCP traffic to port `8080`:
 sudo ufw allow 8080/tcp
 ```
 
-I then checked the rules:
+I then checked the UFW rules:
 
 ```bash
 sudo ufw status numbered
 ```
 
-The new rule appeared in the UFW configuration.
+The new rule appeared in the configuration.
 
-> 📸 **Evidence 7 — UFW allow rule**
-> Add a screenshot showing the `8080/tcp` rule in the UFW configuration.
+> 📸 **Screenshot 7 — UFW Allow Rule**
+> `07-ufw-allow-8080.png`
+> Shows the `8080/tcp` allow rule.
 
 ---
 
@@ -204,8 +211,9 @@ This time, the Python HTTP server page loaded successfully.
 
 This demonstrated that the UFW rule allowed the required incoming traffic to reach the service.
 
-> 📸 **Evidence 8 — Allowed HTTP connection**
-> Add a screenshot showing the HTTP server page successfully loading in the Windows browser.
+> 📸 **Screenshot 8 — Allowed HTTP Connection**
+> `08-http-allowed.png`
+> Shows the HTTP server page successfully loading from Windows.
 
 ---
 
@@ -227,14 +235,15 @@ sudo ufw status numbered
 
 The result showed that there were no numbered rules remaining.
 
-> 📸 **Evidence 9 — Rule removed**
-> Add a screenshot showing the rule deletion and the resulting `sudo ufw status numbered` output.
+> 📸 **Screenshot 9 — UFW Rule Removed**
+> `09-ufw-rule-removed.png`
+> Shows the rule being deleted and the resulting UFW configuration.
 
 ---
 
 ## 8. Testing the Blocked Connection
 
-With the allow rule removed, I returned to the Windows host and attempted to access:
+With the allow rule removed, I returned to Windows and attempted to access:
 
 ```text
 http://192.168.56.101:8080
@@ -244,14 +253,15 @@ The HTTP service could no longer be accessed.
 
 This demonstrated the effect of UFW's default incoming-deny policy.
 
-> 📸 **Evidence 10 — Blocked HTTP connection**
-> Add a screenshot showing that the Windows browser could no longer access the HTTP service.
+> 📸 **Screenshot 10 — Blocked HTTP Connection**
+> `10-http-blocked.png`
+> Shows the Windows browser failing to access the HTTP service.
 
 ---
 
 ## 9. Final Firewall State
 
-Finally, I checked the UFW configuration again:
+Finally, I checked the UFW configuration:
 
 ```bash
 sudo ufw status verbose
@@ -263,24 +273,25 @@ The firewall remained active with:
 Default: deny (incoming), allow (outgoing)
 ```
 
-No specific allow rule for port `8080` remained.
+The specific `8080/tcp` allow rule was no longer present.
 
-> 📸 **Evidence 11 — Final UFW configuration**
-> Add a screenshot showing the final `sudo ufw status verbose` output.
+> 📸 **Screenshot 11 — Final UFW Configuration**
+> `11-ufw-final-state.png`
+> Shows the final UFW status.
 
 ---
 
 ## Results
 
-| Test                                | Result                                         |
-| ----------------------------------- | ---------------------------------------------- |
-| Windows → Kali ping                 | Successful                                     |
-| HTTP access with UFW incoming deny  | Blocked                                        |
-| HTTP access with `8080/tcp` allowed | Successful                                     |
-| HTTP access after removing rule     | Blocked                                        |
-| Final UFW state                     | Active with incoming traffic denied by default |
+| Test                                     | Result                                         |
+| ---------------------------------------- | ---------------------------------------------- |
+| Windows → Kali ping                      | Successful                                     |
+| HTTP access with incoming traffic denied | Blocked                                        |
+| HTTP access with `8080/tcp` allowed      | Successful                                     |
+| HTTP access after removing the rule      | Blocked                                        |
+| Final UFW state                          | Active with incoming traffic denied by default |
 
-The results showed that the network itself was functioning correctly and that the UFW configuration affected whether the HTTP service could be accessed.
+The results showed that the network connection between Windows and Kali was working and that the UFW configuration affected whether the HTTP service could be accessed.
 
 ---
 
@@ -288,14 +299,14 @@ The results showed that the network itself was functioning correctly and that th
 
 This lab helped me understand how a host-based firewall can control incoming network traffic.
 
-The main points I learned were:
+The main things I learned were:
 
 * UFW can deny incoming connections by default.
 * Specific ports can be allowed using firewall rules.
-* A firewall rule can allow a service without changing the underlying network configuration.
+* A firewall rule can allow access to a specific service.
 * Removing the allow rule caused the service to become inaccessible again.
-* Testing both the allowed and blocked states makes it possible to verify that the firewall rule is having the expected effect.
-* Basic network troubleshooting is important when testing security controls, because the network connection itself needs to work before firewall behaviour can be meaningfully tested.
+* Testing both the allowed and blocked states helps verify that a firewall rule is working as expected.
+* Basic network troubleshooting is important when testing security controls because the underlying network connection needs to work before firewall behaviour can be tested properly.
 
 ---
 
@@ -305,7 +316,7 @@ This was a small lab using a single HTTP service and a controlled VirtualBox Hos
 
 It does not represent a full production firewall configuration.
 
-The testing also focused on basic connectivity rather than more advanced firewall features or detailed traffic analysis.
+The testing also focused on basic connectivity rather than advanced firewall features or detailed traffic analysis.
 
 ---
 
